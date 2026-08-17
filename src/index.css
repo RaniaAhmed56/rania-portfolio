@@ -1,0 +1,395 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Serif+Display:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  /* Core palette */
+  --bg: #F2E1D7;           /* Warm Ivory - main background */
+  --bg-light: #F6E6DD;     /* Soft Cream */
+  --bg2: #EBDAD2;          /* Champagne Beige - secondary background */
+  --bg3: #EFE1DA;          /* Warm Pearl - card background */
+  --bg4: #FAEFE8;          /* Ivory - card highlight */
+
+  --fg: #2A1D17;           /* Espresso - primary text */
+  --fg2: #786657;          /* Warm Gray Brown - secondary text */
+  --muted: #9D8F7F;        /* Taupe - muted text */
+
+  --accent: #9C765B;       /* Bronze - primary accent */
+  --accent2: #B87942;      /* Soft Gold - gold accent */
+  --accent-dim: rgba(156, 118, 91, 0.14);
+
+  --border: rgba(216, 198, 188, 0.55);       /* Beige Border - soft */
+  --border-md: rgba(216, 198, 188, 0.8);
+  --border-strong: rgba(197, 178, 164, 0.9); /* Muted Taupe - deep border */
+
+  --glow: rgba(247, 226, 212, 0.9);   /* Champagne Glow */
+  --glow-md: rgba(184, 121, 66, 0.35);
+  --glow-strong: rgba(184, 121, 66, 0.55);
+
+  --panel: rgba(250, 239, 232, 0.72);
+  --glass: rgba(255, 252, 249, 0.55);
+  --glass-md: rgba(255, 252, 249, 0.78);
+
+  --shadow-soft: 0 8px 32px rgba(154, 115, 84, 0.14);
+  --shadow-lift: 0 16px 48px rgba(154, 115, 84, 0.2);
+}
+
+@keyframes preloader-bar-fill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateZ(0); }
+  50% { transform: translateY(-14px) translateZ(0); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes float-x {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes scene-enter-z {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) translateZ(500px) scale(1.15);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1400px) translateZ(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes scene-exit-z {
+  from {
+    opacity: 1;
+    transform: perspective(1400px) translateZ(0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: perspective(1400px) translateZ(-400px) scale(0.78);
+    filter: blur(12px);
+  }
+}
+
+@keyframes corridor-enter {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) translateZ(800px);
+    filter: blur(20px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1400px) translateZ(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes title-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    letter-spacing: 0.4em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0.08em;
+  }
+}
+
+@keyframes sub-reveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch {
+  0%, 100% { clip-path: none; transform: none; }
+  5% { clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%); transform: translateX(-4px); }
+  10% { clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%); transform: translateX(3px); }
+  15% { clip-path: none; transform: none; }
+}
+
+@keyframes orbit-cw {
+  from { transform: rotate(0deg) translateX(var(--orbit-r, 160px)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--orbit-r, 160px)) rotate(-360deg); }
+}
+
+@keyframes orbit-ccw {
+  from { transform: rotate(0deg) translateX(var(--orbit-r, 220px)) rotate(0deg); }
+  to { transform: rotate(-360deg) translateX(var(--orbit-r, 220px)) rotate(360deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 1px;
+  animation: blink-cursor 0.9s step-end infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+@keyframes shimmer-move {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes noise {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  20% { transform: translate(3%, 2%); }
+  30% { transform: translate(-1%, 4%); }
+  40% { transform: translate(2%, -1%); }
+  50% { transform: translate(-3%, 1%); }
+  60% { transform: translate(1%, 3%); }
+  70% { transform: translate(-2%, -2%); }
+  80% { transform: translate(4%, 1%); }
+  90% { transform: translate(-1%, -3%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes portal-breathe {
+  0%, 100% {
+    box-shadow: 0 0 30px var(--p-glow, var(--glow-md)), inset 0 0 20px var(--p-glow, var(--glow-md));
+  }
+  50% {
+    box-shadow: 0 0 60px var(--p-glow, var(--glow-strong)), inset 0 0 40px var(--p-glow, var(--glow-strong));
+  }
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: var(--star-opacity, 0.5); }
+  50% { opacity: calc(var(--star-opacity, 0.5) * 0.3); }
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes eq-bounce {
+  0%, 100% { height: 2px; }
+  50% { height: 7px; }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.95; }
+  100% { transform: translate(var(--confetti-drift, 0px), 105vh) rotate(540deg); opacity: 0.85; }
+}
+
+/* Cursor-trail sparkle used only by HubSparkleTrail on the Hub scene. */
+@keyframes hub-sparkle-float {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -70%) scale(0.3); }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+.font-display { font-family: 'Playfair Display', 'DM Serif Display', Georgia, serif; }
+.font-mono { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+.font-body { font-family: 'Outfit', system-ui, sans-serif; }
+
+.scene-enter { animation: scene-enter-z 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.scene-exit { animation: scene-exit-z 0.55s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+.corridor-enter { animation: corridor-enter 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+.glow-accent {
+  box-shadow: 0 0 24px var(--glow-md), 0 0 48px var(--glow);
+}
+
+.glow-accent-strong {
+  box-shadow: 0 0 32px var(--glow-md), 0 0 64px var(--glow-md), 0 0 96px var(--glow);
+}
+
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(154, 115, 84, 0.02) 2px,
+    rgba(154, 115, 84, 0.02) 4px
+  );
+}
+
+.grid-floor {
+  background-image:
+    linear-gradient(rgba(156, 118, 91, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(156, 118, 91, 0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.grid-floor-blue {
+  background-image:
+    linear-gradient(rgba(156, 118, 91, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(156, 118, 91, 0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.panel-glass {
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-soft);
+}
+
+.panel-glass-light {
+  background: var(--glass);
+  border: 1px solid var(--border-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, var(--fg2) 25%, var(--accent2) 50%, var(--fg2) 75%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-move 3s linear infinite;
+}
+
+/* Scene background images shared across scenes */
+.bg-scene-circle {
+  background-color: var(--bg);
+  background-image: url('/assets/bg-circle.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-scene-wave {
+  background-color: var(--bg);
+  background-image: url('/assets/bg-wave.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Diagonal light-streak overlay for premium hover "shine sweep" on cards.
+   Sits absolutely inside a `position: relative` card, pointer-events: none
+   so it never blocks clicks, and stays subtle (low opacity) so it reads as
+   a refined glass-shine rather than a flashy effect. */
+.shine-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 48%,
+    rgba(255, 255, 255, 0.05) 55%,
+    transparent 70%
+  );
+  background-size: 250% 250%;
+  background-position: -60% -60%;
+  transition: background-position 0.9s ease;
+  border-radius: inherit;
+}
+
+.shine-sweep--active {
+  background-position: 160% 160%;
+}
+
+button { cursor: pointer; }
+
+.scene-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Global overflow guard so translated/glowing decorative elements never
+   force a horizontal scrollbar on narrow screens. */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Subtle cinematic texture: a barely-visible film-grain layer plus a soft
+   vignette darkening the corners slightly. Both are inert (pointer-events:
+   none) and low-opacity — a premium finishing touch, never a distraction. */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.film-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(42, 29, 23, 0.10) 100%);
+}

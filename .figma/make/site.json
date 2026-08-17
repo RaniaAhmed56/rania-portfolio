@@ -1,0 +1,10 @@
+{
+  "description": "Create stunning professional designs with customizable icons and shapes, perfect for designers and businesses looking to enhance their visual content.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
