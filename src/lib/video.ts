@@ -1,6 +1,7 @@
 /**
- * Turns a plain YouTube or Vimeo URL into an embeddable iframe `src`.
- * Returns null if the URL doesn't look like a supported video link.
+ * Turns a plain YouTube, Vimeo, or Google Drive share URL into an embeddable
+ * iframe `src`. Returns null if the URL doesn't look like a supported video
+ * link.
  */
 export function getEmbedUrl(url?: string): string | null {
   if (!url) return null
@@ -19,6 +20,14 @@ export function getEmbedUrl(url?: string): string | null {
   const vimeoMatch = trimmed.match(/vimeo\.com\/(?:video\/)?(\d+)/)
   if (vimeoMatch) {
     return `https://player.vimeo.com/video/${vimeoMatch[1]}`
+  }
+
+  // Google Drive: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+  // (the file must be shared as "anyone with the link can view" for the
+  // embedded preview to load).
+  const driveMatch = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/)
+  if (driveMatch) {
+    return `https://drive.google.com/file/d/${driveMatch[1]}/preview`
   }
 
   return null

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Link2, GitBranch, FileText, ChevronRight } from 'lucide-react'
+import { Mail, Link2, GitBranch, FileText, ChevronRight, Phone } from 'lucide-react'
 import { useViewportSize } from '../hooks/useViewportSize'
 import { playButtonHover, playButtonTap } from '../lib/uiSound'
 
@@ -11,26 +11,34 @@ const CONTACTS = [
   {
     id: 'email',
     label: 'EMAIL',
-    value: 'rania.ahmed@email.com',
+    value: 'raniaahmed200156@gmail.com',
     icon: <Mail size={22} />,
     desc: 'Send a direct message',
-    action: 'mailto:rania.ahmed@email.com',
+    action: 'mailto:raniaahmed200156@gmail.com',
+  },
+  {
+    id: 'phone',
+    label: 'PHONE',
+    value: '+20 112 287 1722',
+    icon: <Phone size={22} />,
+    desc: 'Call or WhatsApp',
+    action: 'tel:+201122871722',
   },
   {
     id: 'linkedin',
     label: 'LINKEDIN',
-    value: '/in/rania-ahmed-dev',
+    value: '/in/ranya-ahmed-222334354',
     icon: <Link2 size={22} />,
     desc: 'Connect professionally',
-    action: '#',
+    action: 'https://linkedin.com/in/ranya-ahmed-222334354',
   },
   {
     id: 'github',
     label: 'GITHUB',
-    value: '@rania-ahmed',
+    value: '@RaniaAhmed56',
     icon: <GitBranch size={22} />,
     desc: 'Explore the source code',
-    action: '#',
+    action: 'https://github.com/RaniaAhmed56',
   },
   {
     id: 'cv',
@@ -38,7 +46,7 @@ const CONTACTS = [
     value: 'Download PDF',
     icon: <FileText size={22} />,
     desc: 'Full professional profile',
-    action: '#',
+    action: 'https://drive.google.com/file/d/YOUR_CV_ID/view',
   },
 ]
 
@@ -161,7 +169,7 @@ export default function ContactRoom({ animClass }: Props) {
                 <a
                   key={contact.id}
                   href={contact.action}
-                  target={contact.action !== '#' ? '_blank' : undefined}
+                  target={!['email', 'phone'].includes(contact.id) && contact.action !== '#' ? '_blank' : undefined}
                   rel="noreferrer"
                   onMouseEnter={() => { setHovered(contact.id); playButtonHover() }}
                   onMouseLeave={() => setHovered(null)}

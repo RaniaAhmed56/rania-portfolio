@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { techStack, type Tech } from '../data'
-import { ArrowUpRight, Monitor, Server, Database, Sliders, MoreHorizontal, Webhook } from 'lucide-react'
+import { ArrowUpRight, Monitor, Server, Database, Sliders, MoreHorizontal, Webhook, Zap, Radio, Shield, Link2, Package } from 'lucide-react'
 import {
   SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiDjango, SiPython,
-  SiNodedotjs, SiPostgresql, SiMongodb, SiApachekafka, SiDocker,
+  SiNodedotjs, SiPostgresql, SiSqlite, SiTailwindcss, SiVite, SiFramer,
+  SiShadcnui, SiRadixui, SiReacthookform, SiZod, SiFirebase, SiGit,
+  SiGithub, SiNpm, SiPypi, SiEslint, SiJsonwebtokens, SiHtml5, SiCss,
 } from 'react-icons/si'
-import { FaAws } from 'react-icons/fa'
 import { useViewportSize } from '../hooks/useViewportSize'
 import { useTilt } from '../hooks/useTilt'
 import Reveal from '../components/Reveal'
@@ -13,22 +14,43 @@ import { playButtonHover, playButtonTap } from '../lib/uiSound'
 
 // Real, recognizable brand marks per technology (Simple Icons via react-icons),
 // each rendered in its own authentic brand color rather than a generic glyph.
-// Django REST Framework has no distinct public brand mark, so it gets a
-// professional "API" glyph (lucide Webhook) instead of reusing Django's logo.
+// A few technologies have no distinct public brand mark (Django REST Framework,
+// React Router, Context API, WebSockets, CORS, Recharts) — those fall back to a
+// fitting lucide glyph instead of reusing an unrelated logo.
 const BRAND_ICONS: Record<string, { Icon: React.ComponentType<{ size?: number; color?: string }>; color: string }> = {
   react: { Icon: SiReact, color: '#61DAFB' },
   nextjs: { Icon: SiNextdotjs, color: '#2A1D17' },
   typescript: { Icon: SiTypescript, color: '#3178C6' },
   javascript: { Icon: SiJavascript, color: '#E8B900' },
+  html: { Icon: SiHtml5, color: '#E44D26' },
+  css: { Icon: SiCss, color: '#663399' },
+  tailwind: { Icon: SiTailwindcss, color: '#38BDF8' },
+  vite: { Icon: SiVite, color: '#B25AA3' },
+  'framer-motion': { Icon: SiFramer, color: '#B0705A' },
+  shadcn: { Icon: SiShadcnui, color: '#2A1D17' },
+  'radix-ui': { Icon: SiRadixui, color: '#8B6FD6' },
+  'react-hook-form': { Icon: SiReacthookform, color: '#EC5990' },
+  zod: { Icon: SiZod, color: '#6B8CAE' },
   django: { Icon: SiDjango, color: '#2E7D4F' },
   drf: { Icon: Webhook, color: '#B0705A' },
+  channels: { Icon: Radio, color: '#9A85B0' },
+  jwt: { Icon: SiJsonwebtokens, color: '#C99A4A' },
+  websockets: { Icon: Zap, color: '#7FA66B' },
+  firebase: { Icon: SiFirebase, color: '#DD8B00' },
+  cors: { Icon: Shield, color: '#B0705A' },
   python: { Icon: SiPython, color: '#3776AB' },
   nodejs: { Icon: SiNodedotjs, color: '#5FA344' },
+  sqlite: { Icon: SiSqlite, color: '#7FA66B' },
   postgresql: { Icon: SiPostgresql, color: '#4169E1' },
-  mongodb: { Icon: SiMongodb, color: '#47A248' },
-  kafka: { Icon: SiApachekafka, color: '#5A5250' },
-  docker: { Icon: SiDocker, color: '#2496ED' },
-  aws: { Icon: FaAws, color: '#DD8B00' },
+  git: { Icon: SiGit, color: '#E44D26' },
+  github: { Icon: SiGithub, color: '#2A1D17' },
+  npm: { Icon: SiNpm, color: '#C12127' },
+  pip: { Icon: SiPypi, color: '#3776AB' },
+  eslint: { Icon: SiEslint, color: '#9A85B0' },
+  'lucide-react': { Icon: Link2, color: '#6B8CAE' },
+  recharts: { Icon: ArrowUpRight, color: '#7FA66B' },
+  'react-router': { Icon: Link2, color: '#6B8CAE' },
+  'context-api': { Icon: Package, color: '#6B8CAE' },
 }
 
 interface Props {

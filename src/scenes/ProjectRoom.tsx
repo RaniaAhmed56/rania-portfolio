@@ -466,6 +466,13 @@ export default function ProjectRoom({ projectId, animClass }: Props) {
                 href: project.videoUrl,
               },
               {
+                id: 'live',
+                label: 'LIVE DEMO',
+                icon: <ExternalLink size={15} />,
+                desc: project.liveUrl ? 'Visit the live site' : 'Not deployed publicly',
+                href: project.liveUrl,
+              },
+              {
                 id: 'github',
                 label: 'GITHUB',
                 icon: <GitBranch size={15} />,

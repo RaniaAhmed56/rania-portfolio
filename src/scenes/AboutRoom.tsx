@@ -10,16 +10,16 @@ interface Props {
 }
 
 const STATEMENTS = [
-  { icon: CodeXml, text: 'I BUILD COMPLETE DIGITAL PRODUCTS.', sub: 'End-to-end, from architecture to deployment.' },
-  { icon: Layers, text: 'FRONTEND + BACKEND.', sub: 'React interfaces. Django & Node.js APIs. All of it.' },
-  { icon: Share2, text: 'I TURN COMPLEX SYSTEMS INTO SIMPLE EXPERIENCES.', sub: 'Kafka pipelines, distributed data — made human.' },
+  { icon: CodeXml, text: 'I BUILD COMPLETE DIGITAL PRODUCTS.', sub: 'Frontend, backend, database, and everything between.' },
+  { icon: Layers, text: 'FRONTEND + BACKEND.', sub: 'React & Next.js interfaces. Django REST APIs. Real integration work.' },
+  { icon: Share2, text: 'I TURN REQUIREMENTS INTO WORKING SYSTEMS.', sub: 'Authentication, real-time features, dashboards — built and shipped.' },
 ]
 
 const FACTS = [
-  { label: 'PROJECTS SHIPPED', value: '5+' },
-  { label: 'TECHNOLOGIES', value: '13' },
-  { label: 'YEARS BUILDING', value: '3+' },
-  { label: 'ARCHITECTURE', value: 'Microservices' },
+  { label: 'PROJECTS SHIPPED', value: '10+' },
+  { label: 'TECHNOLOGIES', value: '30+' },
+  { label: 'API ENDPOINTS BUILT', value: '100+' },
+  { label: 'CORE STACK', value: 'Django + React' },
 ]
 
 /** Splits a fact value like "5+" or "13" into an animatable number plus a static suffix. */
@@ -327,7 +327,7 @@ export default function AboutRoom({ animClass }: Props) {
                     fontSize: 28,
                     color: 'var(--accent2)',
                     marginBottom: 6,
-                    fontStyle: fact.label === 'ARCHITECTURE' ? 'italic' : 'normal',
+                    fontStyle: fact.label === 'CORE STACK' ? 'italic' : 'normal',
                   }}
                 >
                   <AnimatedFact value={fact.value} />
