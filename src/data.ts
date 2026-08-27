@@ -157,6 +157,7 @@ export const projects: Project[] = [
     accent: '#ab94ea',
     hasVideo: true,
     videoUrl: 'https://drive.google.com/file/d/14ODZzVOkPCkyAz0a6L8fJkn35bbfxOnk/view?usp=sharing',
+    liveUrl: 'https://masskan-integration.vercel.app/',
   },
   {
     id: 'neuxpos',
@@ -182,6 +183,7 @@ export const projects: Project[] = [
     accent: '#8393c7',
     hasVideo: true,
     videoUrl: 'https://drive.google.com/file/d/1-n4Yl7rdsDN6KLDrfTozyzu76nxBcDeu/view?usp=sharing',
+    liveUrl: 'https://pos-prototype-omega.vercel.app/',
   },
 ]
 
