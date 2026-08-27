@@ -55,7 +55,7 @@ export const projects: Project[] = [
     accent: '#6d9fff',
     hasVideo: true,
     videoUrl: 'https://drive.google.com/file/d/1dGWdy5C-wmMBbJwRO-aFSoOZ70WHytKn/view?usp=sharing',
-    liveUrl: 'https://www.rqz10.com/',
+    liveUrl: 'https://www.thalaix.com/',
   },
   {
     id: 'blanko',
