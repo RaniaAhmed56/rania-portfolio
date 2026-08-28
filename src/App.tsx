@@ -150,6 +150,7 @@ export default function App() {
           <ProjectRoom
             animClass={animClass}
             projectId={state.projectId ?? 'eschool'}
+            onNavigateProject={(id) => navigateTo('project', id)}
           />
         )
       case 'stack':

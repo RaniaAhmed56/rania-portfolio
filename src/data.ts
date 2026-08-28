@@ -19,6 +19,14 @@ export interface Project {
   videoUrl?: string
   /** Live, publicly reachable URL for the deployed project, if one exists. */
   liveUrl?: string
+  liveLinks?: ProjectLink[]
+  githubLinks?: ProjectLink[]
+}
+
+export interface ProjectLink {
+  label: string
+  description: string
+  href: string
 }
 
 export interface Tech {
@@ -82,6 +90,10 @@ export const projects: Project[] = [
     hasVideo: true,
     videoUrl: 'https://drive.google.com/file/d/1IK6YzPgpIuSj93vnZZRfXWcYm3h732at/view?usp=sharing',
     liveUrl: 'https://ecommerceblanco.vercel.app/',
+    githubLinks: [
+      { label: 'FRONTEND REPOSITORY', description: 'Explore the storefront source code', href: 'https://github.com/RaniaAhmed56/E-commerce_frontend' },
+      { label: 'BACKEND REPOSITORY', description: 'Explore the API source code', href: 'https://github.com/RaniaAhmed56/E-commerce_backend' },
+    ],
   },
   {
     id: 'child-tracking',
@@ -158,6 +170,16 @@ export const projects: Project[] = [
     hasVideo: true,
     videoUrl: 'https://drive.google.com/file/d/14ODZzVOkPCkyAz0a6L8fJkn35bbfxOnk/view?usp=sharing',
     liveUrl: 'https://masskan-integration.vercel.app/',
+    liveLinks: [
+      { label: 'QUICK FRONTEND', description: 'Browse the frontend with mock data', href: 'https://masskan-ten.vercel.app/' },
+      { label: 'FULL INTEGRATION', description: 'Use the frontend connected to the backend', href: 'https://masskan-integration.vercel.app/' },
+      { label: 'BACKEND API', description: 'Open the deployed backend service', href: 'https://masskan-backend-kohl.vercel.app/' },
+    ],
+    githubLinks: [
+      { label: 'FRONTEND REPOSITORY', description: 'Frontend with mock data for quick review', href: 'https://github.com/RaniaAhmed56/masskan' },
+      { label: 'INTEGRATION REPOSITORY', description: 'Frontend connected to the backend', href: 'https://github.com/RaniaAhmed56/masskan_integration' },
+      { label: 'BACKEND REPOSITORY', description: 'Backend API source code', href: 'https://github.com/RaniaAhmed56/masskan_backend' },
+    ],
   },
   {
     id: 'neuxpos',
@@ -184,6 +206,10 @@ export const projects: Project[] = [
     hasVideo: true,
     videoUrl: 'https://drive.google.com/file/d/1-n4Yl7rdsDN6KLDrfTozyzu76nxBcDeu/view?usp=sharing',
     liveUrl: 'https://pos-prototype-omega.vercel.app/',
+    liveLinks: [
+      { label: 'POS LIVE APP', description: 'Open the deployed POS application', href: 'https://pos-prototype-omega.vercel.app/' },
+      { label: 'THALAIX WEBSITE', description: 'Visit the Thalaix product website', href: 'https://www.thalaix.com/' },
+    ],
   },
 ]
 

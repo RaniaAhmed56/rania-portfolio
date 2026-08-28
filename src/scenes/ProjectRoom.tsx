@@ -14,6 +14,7 @@ import { playButtonHover, playButtonTap } from '../lib/uiSound'
 interface Props {
   projectId: string
   animClass: string
+  onNavigateProject: (id: string) => void
 }
 
 /**
@@ -51,7 +52,7 @@ function AnimatedMetricValue({ token }: { token: string }) {
   )
 }
 
-export default function ProjectRoom({ projectId, animClass }: Props) {
+export default function ProjectRoom({ projectId, animClass, onNavigateProject }: Props) {
   const project = projects.find(p => p.id === projectId) ?? projects[0]
   const { isMobile, isTablet } = useViewportSize()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
@@ -93,6 +94,12 @@ export default function ProjectRoom({ projectId, animClass }: Props) {
   const completedLabel = monthsByNum[project.num] ?? 'JANUARY 2024'
   const teamSizes = ['3 MEMBERS', '5 MEMBERS', '4 MEMBERS', '6 MEMBERS']
   const teamLabel = teamSizes[projectIndex % teamSizes.length]
+  const liveLinks = project.liveLinks ?? (project.liveUrl ? [{
+    label: 'LIVE DEMO',
+    description: 'Visit the live site',
+    href: project.liveUrl,
+  }] : [])
+  const githubLinks = project.githubLinks ?? []
 
   return (
     <div
@@ -451,8 +458,8 @@ export default function ProjectRoom({ projectId, animClass }: Props) {
 
           {/* ACTION PORTALS */}
           <div style={{
-            display: 'flex',
-            flexDirection: isMobile ? 'column' : 'row',
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))',
             gap: isMobile ? 12 : 16,
             marginBottom: 40,
             animation: 'fade-up 0.6s 0.35s both',
@@ -465,20 +472,26 @@ export default function ProjectRoom({ projectId, animClass }: Props) {
                 desc: project.videoUrl ? 'Open the demo video' : 'Video coming soon',
                 href: project.videoUrl,
               },
-              {
-                id: 'live',
-                label: 'LIVE DEMO',
+              ...liveLinks.map((link, index) => ({
+                id: `live-${index}`,
+                label: link.label,
                 icon: <ExternalLink size={15} />,
-                desc: project.liveUrl ? 'Visit the live site' : 'Not deployed publicly',
-                href: project.liveUrl,
-              },
-              {
+                desc: link.description,
+                href: link.href,
+              })),
+              ...(githubLinks.length > 0 ? githubLinks.map((link, index) => ({
+                id: `github-${index}`,
+                label: link.label,
+                icon: <GitBranch size={15} />,
+                desc: link.description,
+                href: link.href,
+              })) : [{
                 id: 'github',
                 label: 'GITHUB',
                 icon: <GitBranch size={15} />,
                 desc: 'Explore the source code',
                 href: undefined as string | undefined,
-              },
+              }]),
               {
                 id: 'case',
                 label: 'CASE STUDY',
@@ -552,7 +565,15 @@ export default function ProjectRoom({ projectId, animClass }: Props) {
             borderTop: '1px solid var(--border)',
           }}>
             {projectIndex > 0 ? (
-              <div className="font-mono" style={{
+              <button
+                type="button"
+                onClick={() => onNavigateProject(projects[projectIndex - 1].id)}
+                className="font-mono"
+                style={{
+                  border: 0,
+                  background: 'transparent',
+                  padding: 0,
+                  cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
@@ -568,10 +589,18 @@ export default function ProjectRoom({ projectId, animClass }: Props) {
                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {projects[projectIndex - 1].title}
                 </span>
-              </div>
+              </button>
             ) : <div />}
             {projectIndex < projects.length - 1 && (
-              <div className="font-mono" style={{
+              <button
+                type="button"
+                onClick={() => onNavigateProject(projects[projectIndex + 1].id)}
+                className="font-mono"
+                style={{
+                  border: 0,
+                  background: 'transparent',
+                  padding: 0,
+                  cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
@@ -588,7 +617,7 @@ export default function ProjectRoom({ projectId, animClass }: Props) {
                   {projects[projectIndex + 1].title}
                 </span>
                 <ChevronRight size={14} color="var(--accent2)" style={{ flexShrink: 0 }} />
-              </div>
+              </button>
             )}
           </div>
         </div>
